@@ -8,7 +8,7 @@ public class Main {
         x.startEngine();
         System.out.println(x.getCurrentSpeed());
         x.turnLeft();
-        x.incrementSpeed(10);
+
         System.out.println(x.getCurrentSpeed());
         x.move();
         System.out.println(x.getPosition());

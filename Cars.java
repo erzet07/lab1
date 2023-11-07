@@ -8,11 +8,14 @@ public class Cars implements Movable{
         this.color = color;
         this.enginePower = enginePower;
         this.modelName = modelName;
-        this.position = new Point(0,0);
+        this.positionX = 0;
+        this.positionY = 0;
         this.facing = 0;
         stopEngine();
 
     }
+    public double positionX;
+    public double positionY;
 
     public void move() {
         calculateMove();
@@ -32,23 +35,23 @@ public class Cars implements Movable{
     private void calculateMove() {
         if (this.facing % 4 == -1 || this.facing % 4 == 3) {
 
-            this.position = new Point((int)this.position.getX() - (int)getCurrentSpeed(),(int)this.position.getY());
+            this.positionX -= getCurrentSpeed();
         }
         else if (this.facing % 4 == -2 || this.facing % 4 == 2) {
-            this.position = new Point((int)this.position.getX(),(int)this.position.getY() -(int)getCurrentSpeed());
+            this.positionY -= getCurrentSpeed();
         }
         else if (this.facing % 4 == -3 ||this.facing % 4 == 1) {
-            this.position = new Point((int)this.position.getX()+(int)getCurrentSpeed(),(int)this.position.getY());
+            this.positionX += getCurrentSpeed();
         }
         else {
-            this.position = new Point((int)this.position.getX(),(int)this.position.getY()+(int)getCurrentSpeed());
+            this.positionY += getCurrentSpeed();
         }
     }
 
     public String getPosition() {
-        return (this.position.getX() + " " + this.position.getY());
+        return (this.positionX + " " + this.positionY);
     }
-    private Point position;
+
     public int facing;
     public int nrDoors; // Number of doors on the car
     public double enginePower; // Engine power of the car
