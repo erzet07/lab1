@@ -5,7 +5,13 @@ import java.util.LinkedList;
 public class Main {
     public static void main(String[] args) {
     Volvo240 x = new Volvo240();
-        System.out.println(x.modelName);
+        x.startEngine();
+        System.out.println(x.getCurrentSpeed());
+        x.turnLeft();
+        x.incrementSpeed(10);
+        System.out.println(x.getCurrentSpeed());
+        x.move();
+        System.out.println(x.getPosition());
     }
 
 

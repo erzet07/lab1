@@ -1,20 +1,55 @@
-import org.w3c.dom.ls.LSOutput;
 import java.awt.*;
-import java.sql.SQLOutput;
-import java.util.LinkedList;
 
-public class Cars {
+
+public class Cars implements Movable{
 
     public Cars(int nrDoors, Color color, int enginePower, String modelName) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
         this.modelName = modelName;
+        this.position = new Point(0,0);
+        this.facing = 0;
         stopEngine();
 
     }
 
+    public void move() {
+        calculateMove();
+    }
 
+
+
+
+
+    public void turnLeft() {
+        this.facing += -1;
+
+    }
+    public void turnRight() {
+        this.facing += 1;
+    }
+    private void calculateMove() {
+        if (this.facing % 4 == -1 || this.facing % 4 == 3) {
+
+            this.position = new Point((int)this.position.getX() - (int)getCurrentSpeed(),(int)this.position.getY());
+        }
+        else if (this.facing % 4 == -2 || this.facing % 4 == 2) {
+            this.position = new Point((int)this.position.getX(),(int)this.position.getY() -(int)getCurrentSpeed());
+        }
+        else if (this.facing % 4 == -3 ||this.facing % 4 == 1) {
+            this.position = new Point((int)this.position.getX()+(int)getCurrentSpeed(),(int)this.position.getY());
+        }
+        else {
+            this.position = new Point((int)this.position.getX(),(int)this.position.getY()+(int)getCurrentSpeed());
+        }
+    }
+
+    public String getPosition() {
+        return (this.position.getX() + " " + this.position.getY());
+    }
+    private Point position;
+    public int facing;
     public int nrDoors; // Number of doors on the car
     public double enginePower; // Engine power of the car
     public double currentSpeed; // The current speed of the car
