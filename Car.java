@@ -1,7 +1,5 @@
 import java.awt.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public abstract class Car implements Movable {
     private int nrDoors;
     private double enginePower;
@@ -69,7 +67,7 @@ public abstract class Car implements Movable {
     public void turnRight() {
         direction = (direction + 90) % 360;
     }
-    
+
     class Main {
         public static void main(String[] args) {
         }
