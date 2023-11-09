@@ -51,21 +51,25 @@ class CarTest {
 
     @Test
     void testGas() {
+        saab.startEngine();
         saab.gas(0.5);
         assertTrue(saab.getCurrentSpeed() > 0);
 
+        volvo.startEngine();
         volvo.gas(0.5);
         assertTrue(volvo.getCurrentSpeed() > 0);
     }
 
     @Test
     void testBrake() {
+        saab.startEngine();
         saab.gas(1);
         double initialSpeedSaab = saab.getCurrentSpeed();
         saab.brake(0.5);
         double expectedSpeedSaab = initialSpeedSaab - (0.5 * saab.speedFactor());
         assertEquals(expectedSpeedSaab, saab.getCurrentSpeed());
 
+        volvo.startEngine();
         volvo.gas(1);
         double initialSpeedVolvo = volvo.getCurrentSpeed();
         volvo.brake(0.5);
@@ -163,3 +167,4 @@ class CarTest {
         assertEquals((initialDirectionV + 90) % 360, volvo.getDirection());
     }
 }
+
