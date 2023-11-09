@@ -3,30 +3,42 @@ import java.awt.*;
 public class Saab95 extends Car {
     public boolean turboOn;
 
-    public Saab95(Color color) {
-        super("Saab95", 125, color);
-        turboOn = false;
+    public Saab95() {
+        super(2,"Saab95",125,Color.red);
     }
 
-    public void setTurboOn() {
-        turboOn = true;
+    public boolean setTurboOn() {
+        return turboOn = true;
     }
 
-    public void setTurboOff() {
-        turboOn = false;
+    public boolean setTurboOff() {
+        return turboOn = false;
     }
 
     public void incrementSpeed(double amount) {
-        setCurrentSpeed(getCurrentSpeed() + speedFactor() * amount);
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
     }
 
     public void decrementSpeed(double amount) {
-        setCurrentSpeed(getCurrentSpeed() - speedFactor() * amount);
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
-    
-    protected double speedFactor() {
+
+    public double speedFactor() {
         double turbo = 1;
         if (turboOn) turbo = 1.3;
         return getEnginePower() * 0.01 * turbo;
     }
-}
+
+    protected void gas(double amount){
+        if (amount >= 0 && amount <= 1) {
+            incrementSpeed(amount);
+        }
+    }
+
+    protected void brake(double amount){
+        if (amount >= 0 && amount <= 1) {
+            decrementSpeed(amount);
+        }
+    }
+
+    }
