@@ -1,60 +1,57 @@
 import java.awt.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public abstract class Car implements Movable {
+    private int nrDoors;
     private double enginePower;
-    private double currentSpeed;
+    protected double currentSpeed;
     private Color color;
-    private final String modelName;
+    private String modelName;
     private Point position;
     private double direction;
 
-    public Car(String modelName, double enginePower, Color color) {
+    public Car(int nrDoors, String modelName, double enginePower, Color color) {
+        this.nrDoors = nrDoors;
         this.modelName = modelName;
         this.enginePower = enginePower;
         this.color = color;
-        this.currentSpeed = 0;
-        this.position = new Point();
-        this.direction = 0.0;
+        this.position = new Point(0, 0);
+        this.direction = 0;
+        stopEngine();
     }
 
-    public double getEnginePower() {
-        return enginePower;
+    public void move() {
+        double newX = position.getX() + Math.cos(Math.toRadians(direction)) * currentSpeed;
+        double newY = position.getY() + Math.sin(Math.toRadians(direction)) * currentSpeed;
+        position.setLocation(newX, newY);
     }
-
-    public double getCurrentSpeed() {
-        return currentSpeed;
-    }
-
-    protected void setCurrentSpeed(double currentSpeed) {
-        this.currentSpeed = currentSpeed;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
+    public int getNrDoors(){
+        return nrDoors;
     }
 
     public String getModelName() {
         return modelName;
     }
 
-    public Point getPosition() {
-        return position;
+    public double getEnginePower() {
+        return enginePower;
     }
 
-    public void setPosition(Point position) {
-        this.position = position;
+    public Color getColor() {
+        return color;
+    }
+
+    public double getCurrentSpeed() {
+        return currentSpeed;
+    }
+
+    public Point getPosition() {
+        return new Point(this.position);
     }
 
     public double getDirection() {
         return direction;
-    }
-
-    public void setDirection(double direction) {
-        this.direction = direction;
     }
 
     public void startEngine() {
@@ -65,49 +62,16 @@ public abstract class Car implements Movable {
         currentSpeed = 0;
     }
 
-    public void gas(double amount) {
-        if (amount >= 0 && amount <= 1) {
-            incrementSpeed(amount);
-        }
-    }
-
-    public void brake(double amount) {
-        if (amount >= 0 && amount <= 1) {
-            decrementSpeed(amount);
-        }
-    }
-
-    protected abstract double speedFactor();
-
-
-    protected void incrementSpeed(double amount) {
-        double newSpeed = getCurrentSpeed() + speedFactor() * amount;
-        currentSpeed = Math.min(newSpeed, enginePower);
-    }
-
-    protected void decrementSpeed(double amount) {
-        double newSpeed = getCurrentSpeed() - speedFactor() * amount;
-        currentSpeed = Math.max(newSpeed, 0);
-    }
-    @Override
-    public void move() {
-        int xMovement = (int) Math.round(Math.cos(Math.toRadians(direction)) * currentSpeed);
-        int yMovement = (int) Math.round(Math.sin(Math.toRadians(direction)) * currentSpeed);
-        position.translate(xMovement, yMovement);
-    }
-
-    @Override
     public void turnLeft() {
         direction = (direction - 90) % 360;
-        if (direction < 0) {
-            direction += 360;
-        }
     }
-    
-    @Override
+
     public void turnRight() {
         direction = (direction + 90) % 360;
     }
+    
+    class Main {
+        public static void main(String[] args) {
+        }
+    }
 }
-
-
