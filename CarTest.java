@@ -126,15 +126,15 @@ class CarTest {
         saab.gas(0.5);
         saab.move();
 
-        Point updatedPosition = saab.getPosition();
-        assertNotEquals(sStartingPosition, updatedPosition);
+        Point sUpdatedPosition = saab.getPosition();
+        assertNotEquals(sStartingPosition, sUpdatedPosition);
 
         Point vStartingPosition = volvo.getPosition();
         volvo.startEngine();
         volvo.gas(0.5);
         volvo.move();
 
-        Point vUpdatedPosition = saab.getPosition();
+        Point vUpdatedPosition = volvo.getPosition();
         assertNotEquals(vStartingPosition, vUpdatedPosition);
     }
 
