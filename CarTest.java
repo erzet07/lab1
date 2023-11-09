@@ -141,25 +141,25 @@ class CarTest {
 
     @Test
     void testTurnLeft() {
-        double initialDirection = saab.getDirection();
+        double initialDirectionS = saab.getDirection();
 
         saab.turnLeft();
-        assertEquals((initialDirection - 90) % 360, saab.getDirection());
+        assertEquals((initialDirectionS - 90) % 360, saab.getDirection());
 
-        initialDirection = volvo.getDirection();
+        double initialDirectionV = volvo.getDirection();
         volvo.turnLeft();
-        assertEquals((initialDirection - 90) % 360, volvo.getDirection());
+        assertEquals((initialDirectionV - 90) % 360, volvo.getDirection());
     }
 
     @Test
     void testTurnRight() {
-        double initialDirection = saab.getDirection();
+        double initialDirectionS = saab.getDirection();
 
         saab.turnRight();
-        assertEquals((initialDirection + 90) % 360, saab.getDirection());
+        assertEquals((initialDirectionS + 90) % 360, saab.getDirection());
 
-        initialDirection = volvo.getDirection();
+        double initialDirectionV = volvo.getDirection();
         volvo.turnRight();
-        assertEquals((initialDirection + 90) % 360, volvo.getDirection());
+        assertEquals((initialDirectionV + 90) % 360, volvo.getDirection());
     }
 }
