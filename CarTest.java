@@ -129,7 +129,6 @@ class CarTest {
         saab.startEngine();
         saab.gas(0.5);
         saab.move();
-
         Point sUpdatedPosition = saab.getPosition();
         assertNotEquals(sStartingPosition, sUpdatedPosition);
 
@@ -137,10 +136,10 @@ class CarTest {
         volvo.startEngine();
         volvo.gas(0.5);
         volvo.move();
-
         Point vUpdatedPosition = volvo.getPosition();
         assertNotEquals(vStartingPosition, vUpdatedPosition);
     }
+
 
 
     @Test
@@ -167,4 +166,3 @@ class CarTest {
         assertEquals((initialDirectionV + 90) % 360, volvo.getDirection());
     }
 }
-
