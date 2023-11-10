@@ -7,13 +7,6 @@ public class Volvo240 extends Car {
         super(4,"Volvo240", 100, Color.black);
     }
 
-    public void incrementSpeed(double amount) {
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
-    }
-
-    public void decrementSpeed(double amount) {
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
-    }
 
     public double speedFactor() {
         return getEnginePower() * 0.01 * TRIM_FACTOR;
