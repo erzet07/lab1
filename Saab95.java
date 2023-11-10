@@ -7,21 +7,14 @@ public class Saab95 extends Car {
         super(2,"Saab95",125,Color.red);
     }
 
-    public boolean setTurboOn() {
+    protected boolean setTurboOn() {
         return turboOn = true;
     }
 
-    public boolean setTurboOff() {
+    protected boolean setTurboOff() {
         return turboOn = false;
     }
 
-    public void incrementSpeed(double amount) {
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
-    }
-
-    public void decrementSpeed(double amount) {
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
-    }
 
     public double speedFactor() {
         double turbo = 1;
@@ -42,3 +35,4 @@ public class Saab95 extends Car {
     }
 
     }
+
