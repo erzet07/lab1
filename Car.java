@@ -19,11 +19,21 @@ public abstract class Car implements Movable {
         stopEngine();
     }
 
+    protected abstract double speedFactor();
+
     public void move() {
+        Point initialPosition = getPosition();
+        double currentSpeed = getCurrentSpeed();
+
         double newX = position.getX() + Math.cos(Math.toRadians(direction)) * currentSpeed;
         double newY = position.getY() + Math.sin(Math.toRadians(direction)) * currentSpeed;
         position.setLocation(newX, newY);
+
+        if (initialPosition.equals(position)) {
+            System.out.println("Test failed");
+        }
     }
+
     public int getNrDoors(){
         return nrDoors;
     }
@@ -68,8 +78,12 @@ public abstract class Car implements Movable {
         direction = (direction + 90) % 360;
     }
 
-    class Main {
-        public static void main(String[] args) {
-        }
+    public void incrementSpeed(double amount) {
+        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
     }
+
+    public void decrementSpeed(double amount) {
+        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+    }
+
 }
