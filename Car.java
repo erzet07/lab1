@@ -3,7 +3,7 @@ import java.awt.*;
 public abstract class Car implements Movable {
     private int nrDoors;
     private double enginePower;
-    protected double currentSpeed;
+    private double currentSpeed;
     private Color color;
     private String modelName;
     private Point position;
@@ -23,10 +23,8 @@ public abstract class Car implements Movable {
 
     public void move() {
         Point initialPosition = getPosition();
-        double currentSpeed = getCurrentSpeed();
-
-        double newX = position.getX() + Math.cos(Math.toRadians(direction)) * currentSpeed;
-        double newY = position.getY() + Math.sin(Math.toRadians(direction)) * currentSpeed;
+        double newX = position.getX() + Math.cos(Math.toRadians(direction)) * getCurrentSpeed();
+        double newY = position.getY() + Math.sin(Math.toRadians(direction)) * getCurrentSpeed();
         position.setLocation(newX, newY);
 
         if (initialPosition.equals(position)) {
@@ -78,21 +76,26 @@ public abstract class Car implements Movable {
         direction = (direction + 90) % 360;
     }
 
-    public void incrementSpeed(double amount) {
+    private void incrementSpeed(double amount) {
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
     }
 
-    public void decrementSpeed(double amount) {
+    private void decrementSpeed(double amount) {
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
 
-    protected void gas(double amount){
+    public void gas(double amount) {
         if (amount >= 0 && amount <= 1) {
             incrementSpeed(amount);
+            if (currentSpeed > enginePower) {
+                currentSpeed = enginePower;
+            } else if (currentSpeed < 0) {
+                currentSpeed = 0;
+            }
         }
     }
 
-    protected void brake(double amount){
+    public void brake(double amount){
         if (amount >= 0 && amount <= 1) {
             decrementSpeed(amount);
         }
