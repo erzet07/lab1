@@ -9,8 +9,8 @@ class CarTest {
 
     @BeforeEach
     void newCar() {
-        saab = new Saab95();
-        volvo = new Volvo240();
+       saab = new Saab95();
+       volvo = new Volvo240();
     }
 
     @Test
