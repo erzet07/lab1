@@ -13,16 +13,5 @@ public class Volvo240 extends Car {
     }
 
 
-    protected void gas(double amount){
-        if (amount >= 0 && amount <= 1) {
-            incrementSpeed(amount);
-        }
-    }
-
-    protected void brake(double amount){
-        if (amount >= 0 && amount <= 1) {
-            decrementSpeed(amount);
-        }
-    }
 
 }
